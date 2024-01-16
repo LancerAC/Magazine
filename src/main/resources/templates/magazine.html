@@ -117,6 +117,12 @@
 <header th:insert="blocks/header :: header"></header>
 <div class="container mt-5">
     <h1>Blog</h1>
+    <div th:each="post : ${postList}" class="alert alert-info mt-2">
+        <h3 th:text="${post.title}"></h3>
+        <p th:text="${post.anons}"></p>
+        <a th:href="'/magazine/' + ${post.id}">Details</a>
+
+    </div>
 </div>
 
 <div th:insert="blocks/footer :: footer"></div>
