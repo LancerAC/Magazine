@@ -14,5 +14,11 @@ public class GreetingController {
         model.addAttribute("title", "Main page");
         return "home";
     }
+    @GetMapping("/about")
+    public String getAbout(Model model){
+
+        model.addAttribute("title", "About us");
+        return "about";
+    }
 
 }
