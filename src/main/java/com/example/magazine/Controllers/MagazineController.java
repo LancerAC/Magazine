@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
@@ -23,7 +25,20 @@ public class MagazineController {
     }
     @GetMapping("/magazine/add")
     public String addMagazine(Model model){
-
         return "magazine-add";
+    }
+    @PostMapping("/magazine/add")
+    public String postMagazine(@RequestParam String title,
+                               @RequestParam String anons,
+                               @RequestParam String text){
+        Post post = Post
+                .builder()
+                .title(title)
+                .anons(anons)
+                .full_text(text)
+                .build();
+
+        postRepository.save(post);
+        return "home";
     }
 }
