@@ -122,7 +122,9 @@
         <p th:text="${el.full_text}"></p>
         <p><b>Views:</b> <span th:text="${el.views}"></span></p>
         <a th:href="'/magazine/' + ${el.id} + '/edit'" class="btn btn-warning">Refactor</a>
-        <a th:href="'/magazine/' + ${el.id} + '/remove'" class="btn btn-warning">Remove</a>
+        <form th:action="'/magazine/' + ${el.id} + '/remove'" method="post">
+            <button class="btn btn-warning" type="submit">Delete</button>
+        </form>
     </div>
 </div>
 
