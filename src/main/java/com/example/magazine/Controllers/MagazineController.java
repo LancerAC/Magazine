@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -57,5 +54,28 @@ public class MagazineController {
         model.addAttribute("post", post);
         return "magazine-details";
     }
+    @GetMapping("/magazine/{id}/edit")
+    public String magazineEdit(@PathVariable(value = "id") Long postId, Model model){
+        if(!postRepository.existsById(postId)){
+            return "home";
+        }
+        Iterable<Post> post = postRepository.findAllById(Collections.singleton(postId));
+        model.addAttribute("post", post);
+        return "magazine-edit";
+    }
+
+    @PostMapping("/magazine/{id}/edit")
+    public String changeMagazine(@PathVariable(value = "id") Long id,
+                               @RequestParam String title,
+                               @RequestParam String anons,
+                               @RequestParam String text){
+        Post post = postRepository.findById(id).orElseThrow();
+        post.setTitle(title);
+        post.setAnons(anons);
+        post.setFull_text(text);
+        postRepository.save(post);
+        return "home";
+    }
+
 
 }
