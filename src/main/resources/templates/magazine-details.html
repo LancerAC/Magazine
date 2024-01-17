@@ -120,7 +120,7 @@
         <!--/*@thymesVar id="title" type=""*/-->
         <h1 th:text="${el.title}"></h1>
         <p th:text="${el.full_text}"></p>
-        <p th:text="${el.views}"></p>
+        <p><b>Views:</b> <span th:text="${el.views}"></span></p>
         <a th:href="'/magazine/' + ${el.id} + '/edit'" class="btn btn-warning">Refactor</a>
         <a th:href="'/magazine/' + ${el.id} + '/remove'" class="btn btn-warning">Remove</a>
     </div>
