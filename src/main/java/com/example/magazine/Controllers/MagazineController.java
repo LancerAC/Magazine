@@ -76,6 +76,12 @@ public class MagazineController {
         postRepository.save(post);
         return "home";
     }
+    @PostMapping("/magazine/{id}/remove")
+    public String deleteMagazine(@PathVariable(value = "id") Long id, Model model){
+        postRepository.deleteById(id);
+        return "home";
+    }
+
 
 
 }
