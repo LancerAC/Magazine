@@ -50,6 +50,9 @@ public class MagazineController {
 
     @GetMapping("/magazine/{id}")
     public String magazineDetails(@PathVariable(value = "id") Long postId, Model model){
+        if(!postRepository.existsById(postId)){
+            return "home";
+        }
         Iterable<Post> post = postRepository.findAllById(Collections.singleton(postId));
         model.addAttribute("post", post);
         return "magazine-details";
