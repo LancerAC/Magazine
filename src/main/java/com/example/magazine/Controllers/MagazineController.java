@@ -8,8 +8,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -41,4 +47,12 @@ public class MagazineController {
         postRepository.save(post);
         return "home";
     }
+
+    @GetMapping("/magazine/{id}")
+    public String magazineDetails(@PathVariable(value = "id") Long postId, Model model){
+        Iterable<Post> post = postRepository.findAllById(Collections.singleton(postId));
+        model.addAttribute("post", post);
+        return "magazine-details";
+    }
+
 }
